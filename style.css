@@ -1,0 +1,45 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.container {
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.field {
+  width: 320px;
+  height: 320px;
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: content-box;
+  border: 1px solid black;
+}
+
+.excel {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bg-white {
+  background: lightgoldenrodyellow;
+}
+.bg-black {
+  background: green;
+}
+
+.active {
+  background-color: orange;
+}
+
+.current {
+  background: blueviolet;
+}
