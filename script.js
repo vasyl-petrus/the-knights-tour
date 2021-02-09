@@ -74,7 +74,7 @@ function getNextStep(current) {
     (el) => !el.classList.contains('set')
   );
 
-  const CountNextSteps = (step) => {
+  const countNextSteps = (step) => {
     const { x, y } = getCoordinates(step);
 
     return getKnightNextSteps(x, y).filter(
@@ -82,7 +82,7 @@ function getNextStep(current) {
     ).length;
   };
 
-  const countNextStepsForStep = nextAvaibleSteps.map(CountNextSteps);
+  const countNextStepsForStep = nextAvaibleSteps.map(countNextSteps);
   const minCountNextSteps = Math.min(...countNextStepsForStep);
 
   let nextStepIndex = 0;
