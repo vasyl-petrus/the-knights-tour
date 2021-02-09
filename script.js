@@ -96,9 +96,4 @@ function getNextStep(current) {
   return nextAvaibleSteps[nextStepIndex];
 }
 
-function init(start) {
-  knight.bind(start)();
-}
-
 drawField();
-init(setKnightRandomPosition());
