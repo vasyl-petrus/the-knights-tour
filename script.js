@@ -8,7 +8,7 @@ function getKnightNextSteps(x, y) {
     document.querySelector(`.excel[x='${x + 1}'][y='${y - 2}']`),
     document.querySelector(`.excel[x='${x - 2}'][y='${y + 1}']`),
     document.querySelector(`.excel[x='${x - 1}'][y='${y + 2}']`),
-  ];
+  ].filter((el) => el !== null && el !== undefined);
 }
 
 function clear() {
@@ -18,16 +18,27 @@ function clear() {
   });
 }
 
+function getCoordinates(excel) {
+  return {
+    x: parseInt(excel.getAttribute('x'), 10),
+    y: parseInt(excel.getAttribute('y'), 10),
+  };
+}
+
+function setKnightRandomPosition() {
+  const excels = document.querySelectorAll('.excel');
+  const rand = Math.round(Math.random() * 63);
+  return excels[rand];
+}
+
 function knight() {
   clear();
 
   this.classList.add('current');
-  const currentX = parseInt(this.getAttribute('x'), 10);
-  const currentY = parseInt(this.getAttribute('y'), 10);
 
-  getKnightNextSteps(currentX, currentY)
-    .filter((el) => el !== null && el !== undefined)
-    .forEach((el) => el.classList.add('active'));
+  const { x, y } = getCoordinates(this);
+
+  getKnightNextSteps(x, y).forEach((el) => el.classList.add('active'));
 }
 
 function drawField() {
@@ -56,12 +67,38 @@ function drawField() {
   }
 }
 
-function setKnightRandomPosition() {
-  const excels = document.querySelectorAll('.excel');
-  const rand = Math.round(Math.random() * 63);
-  excels[rand].classList.add('current');
-  knight.bind(excels[rand])();
+function getNextStep(current) {
+  const { x, y } = getCoordinates(current);
+
+  const nextAvaibleSteps = getKnightNextSteps(x, y).filter(
+    (el) => !el.classList.contains('set')
+  );
+
+  const CountNextSteps = (step) => {
+    const { x, y } = getCoordinates(step);
+
+    return getKnightNextSteps(x, y).filter(
+      (el) => !el.classList.contains('set')
+    ).length;
+  };
+
+  const countNextStepsForStep = nextAvaibleSteps.map(CountNextSteps);
+  const minCountNextSteps = Math.min(...countNextStepsForStep);
+
+  let nextStepIndex = 0;
+
+  countNextStepsForStep.forEach((stepsCount, index) => {
+    if (stepsCount === minCountNextSteps) {
+      return (nextStepIndex = index);
+    }
+  });
+
+  return nextAvaibleSteps[nextStepIndex];
+}
+
+function init(start) {
+  knight.bind(start)();
 }
 
 drawField();
-setKnightRandomPosition();
+init(setKnightRandomPosition());
