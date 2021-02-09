@@ -11,6 +11,13 @@ function getKnightNextSteps(x, y) {
   ];
 }
 
+function clear() {
+  document.querySelectorAll('.excel').forEach((element) => {
+    element.classList.remove('active');
+    element.classList.remove('current');
+  });
+}
+
 function knight() {
   clear();
 
@@ -49,11 +56,12 @@ function drawField() {
   }
 }
 
-function clear() {
-  document.querySelectorAll('.excel').forEach((element) => {
-    element.classList.remove('active');
-    element.classList.remove('current');
-  });
+function setKnightRandomPosition() {
+  const excels = document.querySelectorAll('.excel');
+  const rand = Math.round(Math.random() * 63);
+  excels[rand].classList.add('current');
+  knight.bind(excels[rand])();
 }
 
 drawField();
+setKnightRandomPosition();
