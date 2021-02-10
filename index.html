@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>The knight's move</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
 
-  <body>
-    <div class="container">
-      <section><div class="field"></div></section>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>The knight's tour</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="container">
+    <div>
+      <p>A knight's tour is a sequence of moves of a knight on a chessboard such that the knight visits every square
+        exactly once. </p>
+      <a href="https://en.wikipedia.org/wiki/Knight%27s_tour" target="_blank">Learn more here</a>
     </div>
-    <script src="script.js"></script>
-  </body>
+    <div class="field"></div>
+    <button id="start" onclick="move()">Start</button>
+  </div>
+  <script src="script.js"></script>
+</body>
+
 </html>
