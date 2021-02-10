@@ -37,7 +37,6 @@ function knight() {
   this.classList.add('current');
 
   const { x, y } = getCoordinates(this);
-
   getKnightNextSteps(x, y).forEach((el) => el.classList.add('active'));
 }
 
@@ -67,8 +66,8 @@ function drawField() {
   }
 }
 
-function getNextStep(current) {
-  const { x, y } = getCoordinates(current);
+function getNextStep() {
+  const { x, y } = getCoordinates(this);
 
   const nextAvaibleSteps = getKnightNextSteps(x, y).filter(
     (el) => !el.classList.contains('set')
@@ -94,6 +93,36 @@ function getNextStep(current) {
   });
 
   return nextAvaibleSteps[nextStepIndex];
+}
+
+function clearAll() {
+  document.querySelectorAll('.excel').forEach((element) => {
+    element.classList.remove('set');
+    element.classList.remove('current');
+    element.innerHTML = '';
+  });
+}
+
+function move() {
+  clearAll();
+  const start = document.querySelector('#start');
+  start.setAttribute('disabled', 'true');
+  let currentStep = setKnightRandomPosition(),
+    step = 1;
+
+  const interval = setInterval(() => {
+    if (currentStep !== undefined) {
+      clear();
+      currentStep.classList.add('current');
+      currentStep.classList.add('set');
+      currentStep.innerHTML += step;
+      step++;
+      currentStep = getNextStep.bind(currentStep)();
+      return;
+    }
+    start.removeAttribute('disabled');
+    return clearInterval(interval);
+  }, 250);
 }
 
 drawField();
