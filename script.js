@@ -1,3 +1,5 @@
+const CHESS_BOARD_EXELS_COUNT = 64;
+
 function getKnightNextSteps(x, y) {
   return [
     document.querySelector(`.excel[x='${x + 1}'][y='${y + 2}']`),
@@ -27,7 +29,7 @@ function getCoordinates(excel) {
 
 function setKnightRandomPosition() {
   const excels = document.querySelectorAll('.excel');
-  const rand = Math.round(Math.random() * 63);
+  const rand = Math.round(Math.random() * CHESS_BOARD_EXELS_COUNT-1);
   return excels[rand];
 }
 
@@ -45,7 +47,7 @@ function drawField() {
 
   let x = 1,
     y = 8;
-  for (let index = 0; index < 64; index++) {
+  for (let index = 0; index < CHESS_BOARD_EXELS_COUNT; index++) {
     const excel = document.createElement('div');
     field.appendChild(excel);
 
